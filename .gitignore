@@ -1,0 +1,5 @@
+target/
+resources/
+.idea/
+.DS_Store
+src/test/screenshots/
