@@ -2,17 +2,18 @@ package com.aua.testinghw;
 
 import com.aua.testinghw.base.BaseTest;
 import com.aua.testinghw.pages.common.GoodreadsSearchPage;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-public class GoodreadsSearchPageTest extends BaseTest
+public class GoodreadsSearchByAuthorPageTest extends BaseTest
 {
     GoodreadsSearchPage searchPage;
 
+
+    // Search by Author Success Case
     @Test
     public void searchByAuthor(){
         homePage.enterSearchText("Colleen Hoover");
@@ -28,32 +29,31 @@ public class GoodreadsSearchPageTest extends BaseTest
             System.out.println(name);
             System.out.println(titles.get(index));
             System.out.println("______________");
-            Boolean exists = name.contains("Colleen Hoover") || titles.get(index).toLowerCase().contains("By Colleen Hoover".toLowerCase());
+
+            //As the search bar is same for title AND author, the results may include books with titles including authors names
+
+            boolean exists = name.contains("Colleen Hoover") || titles.get(index).toLowerCase().contains("By Colleen Hoover".toLowerCase());
 
             assertTrue(exists);
             index++;
         }
 
-
     }
 
+    //Search by invalid text
     @Test
-    public void searchByTitle(){
-        homePage.enterSearchText("Harry Potter");
+    public void searchByAuthorFail(){
+        String searchValueTest = "298eund189x2";
+        homePage.enterSearchText(searchValueTest);
         searchPage = homePage.clickSearch();
         searchPage.closePopUp();
 
-        List<String> titles = searchPage.getBookTitleList();
+        String searchValue = searchPage.getSearchBarText();
+        String result = searchPage.getSearchResultsText();
 
-        for(String title : titles){
 
-            System.out.println(title);
-            System.out.println("______________");
-            Boolean exists = title.toLowerCase().contains("Harry Potter".toLowerCase());
-
-            assertTrue(exists);
-        }
-
+        assert(searchValue).equals(searchValueTest);
+        assert(result).contains("No results.");
 
     }
 

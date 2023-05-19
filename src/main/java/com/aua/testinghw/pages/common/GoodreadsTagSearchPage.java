@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.aua.testinghw.constants.locators.GoodreadsTagSearchPageLoactors.QUOTE_TAG_FOOTER_SELECTOR;
-import static com.aua.testinghw.constants.locators.GoodreadsTagSearchPageLoactors.QUOTE_TAG_FOOTER_VALUE_SELECTOR;
+import static com.aua.testinghw.constants.locators.GoodreadsTagSearchPageLoactors.*;
 
 public class GoodreadsTagSearchPage extends BasePage {
 
@@ -18,6 +17,10 @@ public class GoodreadsTagSearchPage extends BasePage {
     private By tagFooterSelector = By.cssSelector(QUOTE_TAG_FOOTER_SELECTOR);
 
     private By tagFooterValueSelector = By.cssSelector(QUOTE_TAG_FOOTER_VALUE_SELECTOR);
+
+    private By tagNoSearchResultSelector = By.cssSelector(QUOTE_NO_RESULT);
+
+
 
     public GoodreadsTagSearchPage(WebDriver driver) {
         super(driver);
@@ -43,7 +46,9 @@ public class GoodreadsTagSearchPage extends BasePage {
     }
 
 
-
+public String getResult(){
+        return getElement(tagNoSearchResultSelector).getText();
+}
 
 
 

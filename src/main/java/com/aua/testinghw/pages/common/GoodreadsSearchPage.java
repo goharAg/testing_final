@@ -8,19 +8,19 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.aua.testinghw.constants.locators.GoodreadsHomePageConstants.QUOTES_FIRST_LINK;
-import static com.aua.testinghw.constants.locators.GoodreadsSearchPageLoactors.*;
+import static com.aua.testinghw.constants.locators.GoodreadsSearchByAuthorPageLoactors.*;
+import static com.aua.testinghw.constants.locators.GoodreadsSearchByTitlePageLoactors.*;
 
 public class GoodreadsSearchPage extends BasePage {
         
     WebDriver driver;
-    private By tableName = By.className(TABLE_NAME);
-    private By rowSelector = By.tagName(ROW_TAG);
-    private By cellSelector = By.tagName(CELL_TAG);
-    private By spanSelector = By.tagName(SPAN_TAG);
 
     private By authorPath = By.cssSelector(AUTHOR_CSS_SELECTOR);
     private By bookPath = By.cssSelector(BOOK_PATH);
+
+    private By searchBarQuery = By.id(SEARCH_BAR_QUERY);
+
+    private By searchResult = By.cssSelector(SEARCH_RESULT);
 
 
 
@@ -52,12 +52,22 @@ public class GoodreadsSearchPage extends BasePage {
         return bookTitlesList;
     }
 
+    public String getSearchResultsText(){
+        WebElement inputElement = driver.findElement(searchResult);
+        String t = inputElement.getText();
+        System.out.println(t);
+        return t;
 
+    }
 
+    public String getSearchBarText(){
 
+        WebElement searchResultElement = driver.findElement(searchBarQuery);
+        String t = searchResultElement.getAttribute("value");
+        System.out.println(t);
+        return t;
 
-
-
+    }
 
 
 }

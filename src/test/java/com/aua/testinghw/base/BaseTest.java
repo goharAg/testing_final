@@ -5,6 +5,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -13,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +34,13 @@ public class BaseTest {
 
         options.addArguments("--disable-popup-blocking");
         driver = new ChromeDriver(options);
+
+//    For execution with RemoteWebDriver
+
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        chromeOptions.setCapability("browserVersion", "112.0");
+//        chromeOptions.setCapability("platformName", "Linux");
+//        driver = new RemoteWebDriver(new URL(" http://localhost:4444/"), chromeOptions);
 
     }
 

@@ -36,6 +36,43 @@ public class GoodreadsTagsSearchPageTest extends BaseTest
 
     }
 
+    //Search by two tags
+    @Test
+    public void searchQuoteTwoTag(){
+        quotesPage = homePage.goQuotePage();
+
+        homePage.closePopUp();
+        String tagsName = "love truth";
+
+        tagsSearchPage = quotesPage.searchTwoTags(tagsName);
+
+        List<List<String>> tagNameLists =  tagsSearchPage.getTagsList();
+
+        for(List<String> tageNameList: tagNameLists){
+            System.out.println(tagsName);
+            System.out.println(tageNameList.toString());
+            assert(tageNameList).contains("love-truth");
+        }
+
+    }
+
+    //No such Tag
+    @Test
+    public void searchQuoteNOTag(){
+        quotesPage = homePage.goQuotePage();
+
+        homePage.closePopUp();
+        String tagsName = "love-autumn";
+
+        tagsSearchPage = quotesPage.searchTwoTags(tagsName);
+
+        String resultText =  tagsSearchPage.getResult();
+
+        assert(resultText).contains("Showing 0-0 of 0");
+
+
+    }
+
 
 
 }

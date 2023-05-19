@@ -4,12 +4,13 @@ import com.aua.testinghw.pages.common.Header;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+
+import static com.aua.testinghw.constants.locators.GoodreadsBasePageConstants.*;
 
 public class BasePage {
 
@@ -17,6 +18,14 @@ public class BasePage {
     private WebDriverWait wait;
 
     public Header header;
+    
+    private By popup1MainComponentSelector = By.cssSelector(POPUP1_PARENT_CONTAINER);
+
+    private By popup1CloseButton = By.cssSelector(POPUP1_CLOSE_BUTTON);
+
+    private By popup2MainComponentSelector = By.cssSelector(POPUP2_PARENT_CONTAINER);
+
+    private By popup2CloseButton = By.cssSelector(POPUP2_CLOSE_BUTTON);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -31,24 +40,23 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
+    // Checks and closes popup for the Search Pages
     public void closePopUp(){
 
-        boolean popupNotExists = driver.findElements(By.cssSelector("[data-react-class='ReactComponents.LoginInterstitial']")).isEmpty();
+        boolean popupNotExists = driver.findElements(popup1MainComponentSelector).isEmpty();
         if(!popupNotExists){
             System.out.println("POP EXISTS");
-            By locator = By.cssSelector("[data-react-class='ReactComponents.LoginInterstitial'] div.modal--overlay div.modal__content div.modal__close > button");
-
-            getElement(locator).click();
+            getElement(popup1CloseButton).click();
         }
 
     }
 
+    // Checks and closes popup for the Book Detailed View Pages
     public void closePopUp2(){
-        boolean popupNotExists = driver.findElements(By.className("Overlay--floating")).isEmpty();
+        boolean popupNotExists = driver.findElements(popup2MainComponentSelector).isEmpty();
         if(!popupNotExists){
-            By locator = By.cssSelector("div.Overlay--floating div.Overlay__window div.Overlay__header div.Overlay__close div.Button__container > button");
-
-            getElement(locator).click();
+            System.out.println("POP EXISTS");
+            getElement(popup2CloseButton).click();
         }
 
     }
